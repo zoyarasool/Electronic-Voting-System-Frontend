@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Guidelines</title>
+    <link rel="stylesheet" href="Detail.css">
+</head>
+<body>
+    <div class="container">
+        <h1>This election is being conducted by the <span>Election Commission of Pakistan.</span></h1>
+        <div class="box">
+            <h3>Follow the Steps -</h3>
+            <ul>
+                <li>Stay in the frame of your camera alone and with sufficient lighting for the entire duration.</li>
+                <li>Have Security Keys with you as you would require them to proceed.</li>
+                <li>You are allowed to make only one vote per election.</li>
+                <li>You are allowed to choose only one candidate per election.</li>
+                <li>Candidate information is available on the page.</li>
+                <li>Make sure that you are selecting your wanted candidate by confirming the name and symbol on the screen.</li>
+                <li>After selecting the candidates, make sure to submit the vote.</li>
+                <li>Results will be announced after 5 days of the election being completed.</li>
+                <li>You can verify your vote after the election results are announced.</li>
+            </ul>
+            <div class="checkbox">
+                <input type="checkbox" id="agree">
+                <label for="agree">I understand and will follow the above steps.</label>
+            </div>
+            <div class="buttons">
+                <button class="cancel" onclick="openhomepage()">Cancel</button>
+                <button class="proceed" onclick="openseatpage()">Proceed</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openhomepage(){
+            window.location.href="home page.html";
+        }
+        function openseatpage(){
+            window.location.href="Seats.html";
+        }
+    </script>
+</body>
+</html>

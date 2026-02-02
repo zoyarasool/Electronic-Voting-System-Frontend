@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #043927;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        .results {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            color: black;
+            text-align: left;
+        }
+        h2 {
+            color: #b8860b;
+            text-align: center;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff5733;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        .back-btn:hover {
+            background-color: #c13c15;
+        }
+    </style>
+</head>
+<body>
+    <h2>Total Votes Received: <span id="voteCountDisplay">0</span></h2>
+
+    <h3>PA Candidates Vote Count:</h3>
+    <ul id="paResults"></ul>
+    
+    <h3>NA Candidates Vote Count:</h3>
+    <ul id="naResults"></ul>
+    <button onclick="resetVoteCount()">Reset Votes</button>
+
+
+
+
+    <script>
+// Function to display vote count and candidate votes
+function showVoteCount() {
+    let voteCount = localStorage.getItem("voteCount") || 0;
+    document.getElementById("voteCountDisplay").textContent = voteCount;
+
+    // Get stored PA votes
+    let paVotes = JSON.parse(localStorage.getItem("paVotes")) || {};
+    let paResults = document.getElementById("paResults");
+    paResults.innerHTML = ""; // Clear previous results
+    for (let candidate in paVotes) {
+        let li = document.createElement("li");
+        li.textContent = `${candidate}: ${paVotes[candidate]} votes`;
+        paResults.appendChild(li);
+    }
+
+    // Get stored NA votes
+    let naVotes = JSON.parse(localStorage.getItem("naVotes")) || {};
+    let naResults = document.getElementById("naResults");
+    naResults.innerHTML = ""; // Clear previous results
+    for (let candidate in naVotes) {
+        let li = document.createElement("li");
+        li.textContent = `${candidate}: ${naVotes[candidate]} votes`;
+        naResults.appendChild(li);
+    }
+}
+
+// Call function when admin panel loads
+window.onload = showVoteCount;
+
+function resetVoteCount() {
+    localStorage.setItem("voteCount", 0);
+    localStorage.setItem("paVotes", JSON.stringify({}));
+    localStorage.setItem("naVotes", JSON.stringify({}));
+    showVoteCount(); // Refresh results
+}
+
+    </script>
+</body>
+</html>

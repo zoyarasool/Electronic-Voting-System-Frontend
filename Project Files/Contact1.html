@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Commission Footer</title>
+    <style>
+        .contact{
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .footer {
+            background: linear-gradient(to bottom, #2e8b57, #1E4D2B);
+            color: #FFD700;
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        .footer-section {
+            margin-bottom: 20px;
+            width: calc(100% / 5 - 20px);
+            padding: 10px;
+            box-sizing: border-box;
+            border-right: 1px solid white;
+        }
+        .footer-section:first-child{
+           padding-left: 10px;
+        }
+
+        .footer-section:last-child {
+            border-right: none;
+        }
+
+        .footer-section h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #FFD700;
+        }
+
+        .footer-section p {
+            margin: 0;
+            padding: 4px 0; 
+            line-height: 1.6;
+            color: white;
+            font-size: 0.9em; 
+            text-align: left; 
+        }
+
+        .footer-section ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            line-height: 1.6;
+
+        }
+
+        .footer-section ul li {
+            color: white; 
+        }
+        .footer-section p a,
+        .footer-section ul li a { 
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+        .quick-feedback input,
+        .quick-feedback textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: black;
+        }
+
+        .quick-feedback button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .quick-feedback button:hover {
+            background-color: #218838;
+        }
+
+        .quick-feedback button::before {
+            content: '➤';
+            margin-right: 5px;
+            font-size: 1.2em;
+        }
+
+      
+        @media (max-width: 768px) {
+            .footer-section {
+                width: calc(50% - 20px);
+                border-right: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-section {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <footer class="footer">
+        <div class="footer-section">
+            <h3>Contact:</h3>
+            <p>051-22244954</p>
+            <p>051-22244954</p>
+
+            <h3>Helpline Number:</h3>
+            <p>111 28 28 28</p>
+            <p>111 28 28 28</p>
+
+            <h3>Email:</h3>
+            <p><a href="mailto:mail.ecp.gov.pk">mail.ecp.gov.pk</a></p>
+            <p><a href="mailto:info@electioncomofpak.gov.pk">info@electioncomofpak.gov.pk</a></p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Get In</h3>
+            <ul>
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Know More</h3>
+            <ul>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Steps</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <ul>
+                <li><a href="https://www.facebook.com/ElectionCommissionPakistan/" target="_blank">Facebook</a></li>
+                <li><a href="https://www.instagram.com/electioncommissionofpakistan/" target="_blank">Instagram</a></li>
+                <li><a href="https://twitter.com/ECP_Pakistan" target="_blank">Twitter</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section quick-feedback">
+            <h3>Quick Feedback:</h3>
+            <input type="text" id="feedback-name" placeholder="Your Name">
+            <textarea id="feedback-message" placeholder="Your Message"></textarea>
+            <button onclick="SubmitFeedback()">Send</button>
+        </div>
+    </footer>
+
+    <script>
+        function SubmitFeedback(){
+        alert('Your Feedback is Submitted');
+
+        document.getElementById('feedback-name').value='';
+        document.getElementById('feedback-message').value='';
+    }
+    </script>
+
+</body>
+</html>

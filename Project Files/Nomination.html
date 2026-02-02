@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomination</title>
+    <link rel="stylesheet" href="Seats.css">
+</head>
+<body class="Whole">
+    <h1 class="Heading">Vote for Candidates</h1>
+
+    <div id="ppCandidates" class="candidate-section">
+        <h2>PP Constituency Candidates</h2>
+        <div id="ppCandidatesList"></div>
+        <button id="ppVoteButton" onclick="showNACandidates()">Proceed to NA Vote</button>
+    </div>
+
+    <div id="naCandidates" class="candidate-section" style="display: none;">
+        <h2>NA Constituency Candidates</h2>
+        <div id="naCandidatesList"></div>
+        <button id="naVoteButton" onclick="submitVote()">Submit Vote</button>
+    </div>
+
+    <script>
+        const candidates = JSON.parse(localStorage.getItem("candidates"));
+        const selectedConstituencies = JSON.parse(localStorage.getItem("selectedConstituencies"));
+
+        function displayPPCandidates() {
+            const ppCandidatesList = document.getElementById("ppCandidatesList");
+            ppCandidatesList.innerHTML = "";
+
+            candidates.PP.forEach(candidate => {
+                const candidateDiv = document.createElement("div");
+                candidateDiv.className = "candidate";
+                candidateDiv.innerHTML = `
+                    <img src="${candidate.image}" alt="${candidate.name}">
+                    <h3>${candidate.name}</h3>
+                    <p>${candidate.party}</p>
+                    <button onclick="selectPPCandidate('${candidate.name}')">Vote</button>
+                `;
+                ppCandidatesList.appendChild(candidateDiv);
+            });
+        }
+
+        function selectPPCandidate(selectedCandidate) {
+            localStorage.setItem("selectedPPCandidate", selectedCandidate);
+            alert(`You voted for ${selectedCandidate} in PP Constituency.`);
+        }
+
+        function showNACandidates() {
+            document.getElementById("ppCandidates").style.display = "none";
+            document.getElementById("naCandidates").style.display = "block";
+            displayNACandidates();
+        }
+
+        function displayNACandidates() {
+            const naCandidatesList = document.getElementById("naCandidatesList");
+            naCandidatesList.innerHTML = "";
+
+            candidates.NA.forEach(candidate => {
+                const candidateDiv = document.createElement("div");
+                candidateDiv.className = "candidate";
+                candidateDiv.innerHTML = `
+                    <img src="${candidate.image}" alt="${candidate.name}">
+                    <h3>${candidate.name}</h3>
+                    <p>${candidate.party}</p>
+                    <button onclick="selectNACandidate('${candidate.name}')">Vote</button>
+                `;
+                naCandidatesList.appendChild(candidateDiv);
+            });
+        }
+
+        function selectNACandidate(selectedCandidate) {
+            localStorage.setItem("selectedNACandidate", selectedCandidate);
+            alert(`You voted for ${selectedCandidate} in NA Constituency.`);
+        }
+
+        function submitVote() {
+            const ppCandidate = localStorage.getItem("selectedPPCandidate");
+            const naCandidate = localStorage.getItem("selectedNACandidate");
+
+            if (!ppCandidate || !naCandidate) {
+                alert("Please vote for both PP and NA candidates before submitting.");
+                return;
+            }
+
+            alert(`Your vote has been submitted:\nPP: ${ppCandidate}\nNA: ${naCandidate}`);
+            localStorage.removeItem("selectedPPCandidate");
+            localStorage.removeItem("selectedNACandidate");
+            window.location.href = "index.html";
+        }
+
+        // Display PP candidates initially
+        displayPPCandidates();
+    </script>
+</body>
+</html>

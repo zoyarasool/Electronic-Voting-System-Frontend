@@ -1,0 +1,50 @@
+
+.panel-body{
+    background-color: #065f46;
+    padding-left: 390px;
+    padding-top: 70px;
+}
+.Heading3{
+    color: white ;
+    padding-bottom: 40PX;
+}
+.whole{
+    background-color: #065f46;
+    margin-right: 300px;
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 15px;
+    border-radius: 7px;
+    border: 2px solid white;
+}
+.candidate{
+    display: flex;
+    background-color: white;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 5px;
+    justify-content:space-around;
+    justify-items:left ;
+}
+.checkbox-container{
+    font-weight: bold;
+}
+.submit-button{
+    color: white;
+    background-color: #065f46;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 225px;
+    border:2px solid white;
+    border-radius: 4px;
+}
+.image3{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}

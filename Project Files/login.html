@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #065f46;
+      animation: fadeIn 1s ease-in-out;
+      margin: 0;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.8s ease-in-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 2px solid #2a5298;
+      transition: 0.3s;
+      box-sizing: border-box;
+    }
+    .input-field:focus {
+      border-color: #1e3c72;
+      box-shadow: 0 0 8px rgba(30, 60, 114, 0.5);
+      outline: none;
+    }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #065f46;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #feb47b, #ff7e5f);
+      transform: scale(1.05);
+    }
+    .password-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+      color: #2a5298;
+      font-size: 18px;
+    }
+    a {
+      display: block;
+      margin-top: 10px;
+      color: #065f46;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <h4>CNIC</h4>
+      <input
+        type="text"
+        class="input-field"
+        id="cnic"
+        placeholder="Enter your 13-digit CNIC"
+        maxlength="13"
+      />
+
+      <h4>Date of Birth</h4>
+      <input
+        type="date"
+        class="input-field"
+        id="dob"
+      />
+
+      <h4>Password</h4>
+      <div class="password-container">
+        <input
+          type="password"
+          class="input-field"
+          id="password"
+          placeholder="Enter your password"
+        />
+        <span class="toggle-password" onclick="togglePassword()">👁</span>
+      </div>
+
+      <a href="#Contact" onclick="openhomePage()">Help?</a>
+      <button type="submit" class="btn">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const passwordField = document.getElementById("password");
+      passwordField.type =
+        passwordField.type === "password" ? "text" : "password";
+    }
+
+    function openhomePage() {
+      window.location.href = "home page.html";
+    }
+
+    // Initialize users if not already in localStorage
+    if (!localStorage.getItem("users")) {
+      const users = [
+        { cnic: "4210155730776", dob: "2004-10-10", password: "12345" },
+        { cnic: "3610267708229", dob: "2006-12-04", password: "35711" },
+        { cnic: "3310424458990", dob: "2004-09-22", password: "zoy@2209" }
+      ];
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      validateLogin();
+    });
+
+    function validateLogin() {
+      const cnic = document.getElementById("cnic").value.trim();
+      const dob = document.getElementById("dob").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // Cooldown check
+      const lastLogin = localStorage.getItem("lastLogin");
+      const cooldownTime = 1 * 60 * 1000; // 1 minute
+
+      if (lastLogin && (Date.now() - lastLogin) < cooldownTime) {
+        alert("You have recently logged in. Please try again later.");
+        return;
+      }
+
+      // Validate CNIC
+      if (cnic.length !== 13 || isNaN(cnic)) {
+        alert("Please enter a valid 13-digit CNIC.");
+        return;
+      }
+
+      if (!dob || !password) {
+        alert("Please enter all fields.");
+        return;
+      }
+
+      // Check age eligibility (Must be 18+)
+      const birthDate = new Date(dob);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      if (age < 18) {
+        alert("You are not eligible to vote.");
+        return;
+      }
+
+      // Authentication
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const dobInput = new Date(dob).toISOString().split("T")[0];
+
+      const isUserFound = users.some(user =>
+        user.cnic === cnic && user.dob === dobInput && user.password === password
+      );
+
+      if (isUserFound) {
+        document.querySelector(".btn").innerText = "Logging in...";
+        document.querySelector(".btn").style.transform = "scale(0.95)";
+        localStorage.setItem("lastLogin", Date.now());
+
+        setTimeout(() => {
+          window.location.href = "Seats.html";
+        }, 1000);
+      } else {
+        alert("Invalid credentials. Please try again.");
+      }
+    }
+  </script>
+</body>
+</html>

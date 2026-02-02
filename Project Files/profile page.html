@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <style>
+        
+        body{
+            font-family:  sans-serif;
+        }
+        nav{
+            background-color: #065f46;
+            margin-bottom: 20px;
+            align-items: center;
+            padding-left: 700px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        nav a{
+            margin: 0 15px;
+            text-decoration: none;
+            color: #080808;
+            font-weight:bold ;
+            margin-top: 100px;
+
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        .btn{
+            height: 30px;
+            width: 70px;
+            border-radius: 0.3cm;
+        }
+        .container{
+            background-color: #60a32d;
+            margin:50px auto;
+            height: 700px;
+            width: 400px;
+            display: flexbox;
+            border-radius: 30px;
+            padding-top: 10px;
+            padding-left: 20px;
+            }
+        .second{
+            height: 30px;
+            width: 300px;
+            border-radius: 10px;
+        }
+        .first{
+            height: 30px;
+            width: 70px;
+            margin-left: 150px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+        img{
+            height: 200px;
+            width: 200px;
+            margin-top: 100px;
+            justify-items: center;
+            margin-left: 40px;
+        
+        }
+        .button{
+            border-radius: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-left: 60px;
+        }
+        h5{
+            margin-left:60px;
+
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#personal info">Personal Info</a>
+        <a href="#Elections">Elections</a>
+        <a href="#contact">Contact</a>
+        <a href="#View Results">View Results</a>
+        <button class="btn">Vote</button>
+    </nav>
+    <div class="profile">
+        <div class="second">
+            <img src="profile-pic 1.png"><br><br><br>
+            <button class="button">Change profile picture</button>
+            <h5>Edit Profile</h5>
+        </div>
+    <div class="container">
+        <h4>Name:</h4>
+        <input type="text" class="second" placeholder="Enter your name">
+        <h4>Father/Mother Name:</h4>
+        <input type="text" class="second" placeholder="Enter your mother/father name">
+        <h4>CNIC:</h4>
+        <input type="number" class="second" placeholder="Enter your cnic">
+        <h4>Age:</h4>
+        <input type="number" class="second" placeholder="Enter your age">
+        <h4>Address:</h4>
+        <input type="text" class="second" placeholder="Enter your address">
+        <h4>Mobile No:</h4>
+        <input type="text" class="second" placeholder="Enter your mobile no"><br><br>
+        <button class="first">Update</button>
+        
+    </div>
+    
+</body>
+</html>

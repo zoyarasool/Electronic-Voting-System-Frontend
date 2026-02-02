@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="Home Page.css">
+</head>
+<body>
+    <div class="homepage">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="Website Logo">
+            </div>
+            <nav>
+                <a href="#About">About</a>
+                <a href="#Contact">Contact</a>
+                <button class="login-btn" onclick="loginAsAdmin()">Admin</button>
+                <button class="login-btn" onclick="loginAsVoter()">Voter</button>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <img src="vote.png" alt="Vote Image" width="200" height="800">
+            <h1>Be a part of decision</h1>
+            <h2>Vote Today</h2>
+           
+        </section>
+    </div>
+
+    <div class="feature" id="feature">
+        <h2 class="Feat">Features</h2>
+        <div class="detail1"> 
+            
+        <p>Easy to use</p>
+        <p>Faster voting process</p>
+        <p>Verifiable transactions</p>
+        <p>Cheaper than ballot voting system</p>
+        <p>Backed by ethereum based technology</p>
+    </div> 
+    </div>
+    <section class="About" id="About">
+        <div class="About-container">
+            <h2 class="Heading9">About</h2>
+            <p class="paragraph">
+                Our electronic voting system ensures transparency, security, and fairness in every election.<br> 
+                Built with cutting-edge technology, we provide a user-friendly and reliable platform for seamless voting.
+            </p>
+           
+        </div>
+    </section>
+    
+    
+    
+    <div class="Followstep" id="step">
+        <h2 class="Heading10">Steps</h2>
+        <div class="detail1">
+            <p> Sign in as a user</p>
+            <p> Enter your security key</p>
+            <p> Vote for your candidate and submit</p>
+            <p>Go to the vote option on the dashboard</p>
+            <p> Register yourself by filling the required information</p>
+        </div>
+    </div>
+
+    <div class="Contact" id="Contact">
+        <footer class="footer">
+            <div class="footer-section">
+                <h3>Contact:</h3>
+                <p>051-22244954</p>
+                <p>051-22244954</p>
+
+                <h3>Helpline Number:</h3>
+                <p>111 28 28 28</p>
+                <p>111 28 28 28</p>
+
+                <h3>Email:</h3>
+                <p><a href="mailto:mail.ecp.gov.pk">mail.ecp.gov.pk</a></p>
+                <p><a href="mailto:info@electioncomofpak.gov.pk">info@electioncomofpak.gov.pk</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Get In</h3>
+                <ul>
+                    
+                    <li><a href="#" onclick="loginAsVoter()">login</a></li>
+                    <li><a href="#" onclick="opendetailpage()">Read More</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Know More</h3>
+                <ul>
+                    <li><a href="#feature">Features</a></li>
+                    <li><a href="#About">About</a></li>
+                    <li><a href="#step">Steps</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="https://www.facebook.com/ElectionCommissionPakistan/" target="_blank">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/electioncommissionofpakistan/" target="_blank">Instagram</a></li>
+                    <li><a href="https://twitter.com/ECP_Pakistan" target="_blank">Twitter</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section quick-feedback">
+                <h3>Quick Feedback:</h3>
+                <input type="text" id="feedback-name" placeholder="Your Name">
+                <textarea id="feedback-message" placeholder="Your Message"></textarea>
+                <button onclick="SubmitFeedback()">Send</button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function loginAsVoter(){
+            window.location.href = "login.html";
+        }
+        function loginAsAdmin(){
+            window.location.href = "Admin Page.html";
+            }
+        function opendetailpage(){
+            window.location.href="Detail.html";
+        }
+        function SubmitFeedback(){
+            alert('Your Feedback is Submitted');
+            document.getElementById('feedback-name').value = '';
+            document.getElementById('feedback-message').value = '';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register & Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #065f46;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            text-align: center;
+            padding: 30px;
+            width: 320px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.5s ease-in-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .input-field {
+            border-radius: 5px;
+            height: 35px;
+            width: 100%;
+            border: 2px solid #2575fc;
+            padding-left: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+        .input-field:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+        }
+        .btn {
+            background: #065f46;
+            height: 40px;
+            width: 100%;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #feb47b, #ff7e5f);
+            transform: scale(1.05);
+        }
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            color: #2575fc;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="formTitle">Register</h1>
+        <h4>Username</h4>
+        <input type="text" class="input-field" id="username" placeholder="Enter your Username">
+        
+        <h4>Password</h4>
+        <div class="password-container">
+            <input type="password" class="input-field" id="password" placeholder="Enter your password">
+            <span class="toggle-password" onclick="togglePassword()">👁</span>
+        </div>
+        
+        <div class="checkbox-container" id="savePasswordContainer">
+            <input type="checkbox" id="savePassword">
+            <label for="savePassword">Save Password</label>
+        </div>
+
+        <br>
+        <button class="btn" id="actionBtn" onclick="registerUser()">Register</button>
+        <button class="btn" id="toggleBtn" onclick="toggleForm()">Switch to Login</button>
+    </div>
+
+
+
+    <script>
+        let isRegistering = true;
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        function toggleForm() {
+            isRegistering = !isRegistering;
+            
+            document.getElementById("formTitle").innerText = isRegistering ? "Register" : "Login";
+            document.getElementById("actionBtn").innerText = isRegistering ? "Register" : "Login";
+            document.getElementById("actionBtn").setAttribute("onclick", isRegistering ? "registerUser()" : "validateLogin()");
+            document.getElementById("toggleBtn").innerText = isRegistering ? "Switch to Login" : "Switch to Register";
+            
+            document.getElementById("savePasswordContainer").style.display = isRegistering ? "flex" : "none";
+
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+        }
+
+        function registerUser() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const savePassword = document.getElementById("savePassword").checked;
+
+            if (!username) {
+                alert("Please enter a username.");
+                return;
+            }
+
+            if (users.some(user => user.username === username)) {
+                alert("Username already exists. Please choose another.");
+                return;
+            }
+
+            let missing = [];
+
+            if (savePassword) {
+                if (!/[A-Z]/.test(password)) missing.push("✔ At least 1 uppercase letter");
+                if (!/[a-z]/.test(password)) missing.push("✔ At least 1 lowercase letter");
+                if (!/\d/.test(password)) missing.push("✔ At least 1 number");
+                if (!/[\W_]/.test(password)) missing.push("✔ At least 1 special character");
+                if (password.length < 8) missing.push("✔ Minimum length of 8");
+
+                if (missing.length > 0) {
+                    alert("Your password is missing:\n" + missing.join("\n"));
+                    return;
+                }
+            }
+
+            users.push({ username, password: savePassword ? password : null });
+            localStorage.setItem("users", JSON.stringify(users));
+
+            alert("Registration successful! Redirecting to login...");
+            toggleForm();
+        }
+
+        function validateLogin() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!username) {
+                alert("Please enter your username.");
+                return;
+            }
+
+            const user = users.find(user => user.username === username);
+
+            if (!user) {
+                alert("Username not found.");
+                return;
+            }
+
+            if (user.password) {
+                if (user.password !== password) {
+                    alert("Invalid password.");
+                    return;
+                }
+            } else {
+                alert("Login Successful! (Password was not saved)");
+            }
+
+            alert("Login Successful!");
+            window.location.href = "Result.html"; 
+        }
+
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            passwordField.type = passwordField.type === "password" ? "text" : "password";
+        }
+
+        document.getElementById("username").addEventListener("input", function () {
+            const username = this.value.trim();
+            const user = users.find(user => user.username === username);
+            if (user && user.password) {
+                document.getElementById("password").value = user.password;
+            } else {
+                document.getElementById("password").value = "";
+            }
+        });
+    </script>
+</body>
+</html>
