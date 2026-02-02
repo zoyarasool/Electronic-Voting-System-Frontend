@@ -135,9 +135,9 @@
     // Initialize users if not already in localStorage
     if (!localStorage.getItem("users")) {
       const users = [
-        { cnic: "4210155730776", dob: "2004-10-10", password: "12345" },
-        { cnic: "3610267708229", dob: "2006-12-04", password: "35711" },
-        { cnic: "3310424458990", dob: "2004-09-22", password: "zoy@2209" }
+        { cnic: "-", dob: "-", password: "-" },
+        { cnic: "-", dob: "-", password: "-" },
+        { cnic: "-", dob: "-", password: "-" }
       ];
       localStorage.setItem("users", JSON.stringify(users));
     }
@@ -209,3 +209,4 @@
   </script>
 </body>
 </html>
+
